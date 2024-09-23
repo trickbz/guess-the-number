@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guess-the-number-deployment  # Name of the deployment
+spec:
+  replicas: 1  # Number of instances
+  selector:
+    matchLabels:
+      app: guess-the-number
+  template:
+    metadata:
+      labels:
+        app: guess-the-number
+    spec:
+      containers:
+      - name: guess-the-number
+        image: us-docker.pkg.dev/trickbz-guess-the-number/gcr.io/guess-the-number:$GITHUB_SHA  # Image from GCR
+        ports:
+        - containerPort: 80  # Port where the app listens
