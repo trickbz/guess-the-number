@@ -31,10 +31,13 @@ jobs:
       # Step 3: Build Docker image
       - name: Build Docker image
         #  run: docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/guess-the-number:$GITHUB_SHA .
-        run: docker build -t guess-the-number:$GITHUB_SHA .
+        run: docker build -t guess-the-number .
 
       - name: Tag Docker image
-        run: docker tag guess-the-number:$GITHUB_SHA us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/gcr.io/guess-the-number:$GITHUB_SHA
+        run: docker tag guess-the-number us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/gcr.io/guess-the-number:$GITHUB_SHA
+
+      - name: Auth Docker to GCR
+        run: gcloud auth configure-docker us-docker.pkg.dev
 
       # Step 4: Push Docker image to GCR
       - name: Push Docker image to GCR
