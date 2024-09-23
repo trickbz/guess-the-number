@@ -25,8 +25,8 @@ jobs:
       - name: Authenticate Docker to Google Container Registry
         run: gcloud auth configure-docker us-central1-docker.pkg.dev
 
-      - name: Auth Docker GCP
-        run: gcloud auth login
+      # - name: Auth Docker GCP
+      # run: gcloud auth login.
 
       # Step 3: Build Docker image
       - name: Build Docker image
