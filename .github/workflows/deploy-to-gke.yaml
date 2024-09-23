@@ -34,7 +34,7 @@ jobs:
         run: docker build -t guess-the-number:$GITHUB_SHA .
 
       - name: Tag Docker image
-        run: docker tag guess-the-number us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/gcr.io/guess-the-number:$GITHUB_SHA
+        run: docker tag guess-the-number:$GITHUB_SHA us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/gcr.io/guess-the-number:$GITHUB_SHA
 
       # Step 4: Push Docker image to GCR
       - name: Push Docker image to GCR
