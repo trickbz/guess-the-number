@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: guess-the-number-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: guess-the-number
+  ports:
+    - protocol: TCP
+      port: 80           # The port that will be exposed externally
+      targetPort: 80      # The port your app is listening on inside the container
