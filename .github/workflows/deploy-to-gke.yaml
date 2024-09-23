@@ -27,13 +27,13 @@ jobs:
         run: docker build -t guess-the-number .
 
       - name: Tag Docker image
-        run: docker tag guess-the-number us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/gcr.io/guess-the-number:$GITHUB_SHA
+        run: docker tag guess-the-number us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/gcr.io/guess-the-number:v1
 
       - name: Auth Docker to GCR
         run: gcloud auth configure-docker us-docker.pkg.dev
 
       - name: Push Docker image to GCR
-        run: docker push us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/gcr.io/guess-the-number:$GITHUB_SHA
+        run: docker push us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/gcr.io/guess-the-number:v1
 
       - name: Install kubectl
         run: |
@@ -44,7 +44,6 @@ jobs:
         run: |
           gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone ${{ secrets.GKE_CLUSTER_ZONE }} --project ${{ secrets.GCP_PROJECT_ID }}
 
-      #kubectl set image deployment/guess-the-number-deployment guess-the-number=us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/guess-the-number:${{ github.sha }}
       - name: Deploy to GKE
         run: |
           kubectl apply -f k8s/deployment.yaml

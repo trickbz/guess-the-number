@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: guess-the-number
-        image: us-docker.pkg.dev/trickbz-guess-the-number/gcr.io/guess-the-number:$GITHUB_SHA  # Image from GCR
+        image: us-docker.pkg.dev/trickbz-guess-the-number/gcr.io/guess-the-number:v1
         ports:
         - containerPort: 80  # Port where the app listens
