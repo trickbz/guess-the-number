@@ -35,15 +35,10 @@ jobs:
       - name: Push Docker image to GCR
         run: docker push us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/gcr.io/guess-the-number:$GITHUB_SHA
 
-      # sudo apt-get install -y kubectl
       - name: Install kubectl
         run: |
           gcloud components install kubectl
           gcloud components update
-
-      # - name: Install gke-gcloud-auth-plugin
-      #   run: |
-      #     sudo apt-get install -y google-cloud-sdk-gke-gcloud-auth-plugin
 
       - name: Get GKE credentials
         run: |
@@ -51,4 +46,4 @@ jobs:
 
       - name: Deploy to GKE
         run: |
-          kubectl set image deployment/guess-the-number-deployment guess-the-number=us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/guess-the-number:$GITHUB_SHA
+          kubectl set image deployment/guess-the-number-deployment guess-the-number=us-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/guess-the-number:${{ github.sha }}
