@@ -34,7 +34,7 @@ export const useUsers = () => {
   useEffect(() => {
     const controller = new AbortController();
     getUsers(controller.signal);
-  }, []);
+  }, [getUsers]);
 
   return {
     users,
