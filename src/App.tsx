@@ -1,4 +1,9 @@
+import {UserList} from './components/UserList';
+import {useUsers} from './hooks/reqres';
+
 function App() {
+  const {users} = useUsers();
+
   const renderButtons = () => {
     return (
       <div className='rounded-md border-2 py-4 flex items-center justify-center w-[200px] ml-auto mr-auto'>
@@ -23,6 +28,7 @@ function App() {
         &nbsp;game!
       </h1>
       {renderButtons()}
+      <UserList users={users} />
     </div>
   );
 }
