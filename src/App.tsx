@@ -1,8 +1,7 @@
 import {UserList} from './components/UserList';
-import {useUsers} from './hooks/reqres';
 
 function App() {
-  const {users} = useUsers();
+  const isProduction = process.env.NODE_ENV === 'production';
 
   const renderButtons = () => {
     return (
@@ -20,6 +19,14 @@ function App() {
     );
   };
 
+  const renderUsers = () => {
+    if (isProduction) {
+      return null;
+    }
+
+    return <UserList />;
+  };
+
   return (
     <div className='App'>
       <h1 className='font-semibold text-2xl text-gray-600 flex justify-center mb-4'>
@@ -28,7 +35,7 @@ function App() {
         &nbsp;game!
       </h1>
       {renderButtons()}
-      <UserList users={users} />
+      {renderUsers()}
     </div>
   );
 }
